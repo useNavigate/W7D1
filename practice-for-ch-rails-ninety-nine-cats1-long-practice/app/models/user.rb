@@ -7,19 +7,15 @@
 #  password_digest :string           not null
 #  session_token   :string           not null
 #  created_at      :datetime         not null
-# u updated_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
   before_validation :ensure_session_token
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
 
-  def ensure_session_token
-    session_token ||= generate_unique_session_token
-  end
-
   def password=(password)
-    password_digest = Bcrypt::Password.create(password)
+    password_digest = BCrypt::Password.create(password)
     @password = password
   end
 
@@ -46,7 +42,7 @@ class User < ApplicationRecord
 
   def generate_unique_session_token
     token = SecureRandom::urlsafe_base64
-    while User.exist?(session_token: token)
+    while User.exists?(session_token: token)
       token = SecureRandom::urlsafe_base64
     end
     token
