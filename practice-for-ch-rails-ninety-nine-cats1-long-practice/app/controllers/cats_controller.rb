@@ -1,4 +1,5 @@
 class CatsController < ApplicationController
+
   def index
     @cats = Cat.all
     render :index
@@ -44,4 +45,5 @@ class CatsController < ApplicationController
   def cat_params
     params.require(:cat).permit(:birth_date, :color, :description, :name, :sex)
   end
+  
 end

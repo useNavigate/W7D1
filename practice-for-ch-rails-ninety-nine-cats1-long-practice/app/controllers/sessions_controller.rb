@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
   def new
     render :new
   end
@@ -15,4 +16,5 @@ class SessionsController < ApplicationController
 
   def destroy
   end
+  
 end
