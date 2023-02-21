@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   def login(user)
     #session = hash // [:session_token] => key
     session[:session_token] = user.reset_session_token!
-    # everytime when a user logs in, it generate new token
+    # everytime when a user logs in, it generates new token
   end
 end
